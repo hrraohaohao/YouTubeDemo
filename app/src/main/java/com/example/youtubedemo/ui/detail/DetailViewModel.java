@@ -1,4 +1,4 @@
-package com.example.youtubedemo.ui.home;
+package com.example.youtubedemo.ui.detail;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -10,11 +10,10 @@ import com.example.youtubedemo.bean.SceneBean;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeViewModel extends ViewModel {
-
+public class DetailViewModel extends ViewModel {
     private final MutableLiveData<List<SceneBean>> sceneList;
 
-    public HomeViewModel() {
+    public DetailViewModel() {
         sceneList = new MutableLiveData<>();
     }
 

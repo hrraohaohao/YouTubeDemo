@@ -1,8 +1,12 @@
-package com.example.youtubedemo;
+package com.example.youtubedemo.ui;
 
 import android.os.Bundle;
 
+import com.example.youtubedemo.listener.OnNextListener;
+import com.example.youtubedemo.ui.detail.DetailFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.hao.usbproject.R;
+import com.hao.usbproject.databinding.ActivityMainBinding;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -10,9 +14,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.youtubedemo.databinding.ActivityMainBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnNextListener {
 
     private ActivityMainBinding binding;
 
@@ -32,4 +35,21 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 
+    @Override
+    public void onNext() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, DetailFragment.newInstance(), DetailFragment.TAG)
+                .commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        DetailFragment fragment = (DetailFragment) getSupportFragmentManager()
+                .findFragmentByTag(DetailFragment.TAG);
+        if (fragment != null && fragment.isVisible()) {
+            fragment.closeFragment();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
